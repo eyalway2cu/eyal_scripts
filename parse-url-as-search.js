@@ -1,3 +1,4 @@
+// Function to parse string as URL as used in Zapier
 function getParameterByName (name) 
 {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
