@@ -1,4 +1,4 @@
-if document.location.pathname == "/"{
+if (document.location.pathname == "/") {
 	// select the target node
 	var target = document.querySelector('ul.tp-revslider-mainul');
 
