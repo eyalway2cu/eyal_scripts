@@ -1,4 +1,4 @@
-var phoneInput = document.querySelector("input[name='phone'")
+var phoneInput = document.querySelector("input[name='phone'");
 
 phoneInput.addEventListener("blur", function() {
 	
