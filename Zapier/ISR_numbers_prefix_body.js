@@ -6,7 +6,7 @@ var numbercheck = function(prefix) {
 if (input.number.indexOf("-") > -1){
 	var prefix = input.number.substr(0, number.indexOf('-'));
 	var numberbody = input.number.substr(number.indexOf('-'), input.number.length).replace(/-/g, "");
-	output = [{prefix: prefix, numberbody: numberbody}];
+	output = [{prefix: prefix, number: numberbody}];
 } else {
 	if (landline.filter(numbercheck).length > 0){
 		output = [{prefix: input.number.slice(0, 2), number: input.number.slice(2)}];
