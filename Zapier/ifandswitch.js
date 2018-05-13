@@ -3,9 +3,9 @@
 ******************************************************************
 
 if (input.variable == "your match") {
-	output = [{variablename: "output text"}];
+	variablename = "output text";
 } else {
-	output = [{variablename: "different output text"}];
+	variablename = "different output text";
 }
 
 ******************************************************************
@@ -13,9 +13,9 @@ if (input.variable == "your match") {
 ******************************************************************
 
 if (input.variable.indexOf("your match") > -1) {
-	output = [{variablename: "output text"}];
+	variablename = "output text";
 } else {
-	output = [{variablename: "different output text"}];
+	variablename = "different output text";
 }
 
 
@@ -24,12 +24,18 @@ if (input.variable.indexOf("your match") > -1) {
 ******************************************************************
 switch(input.variable) {
     case "match one":
-        output = [{variablename: "output text1"}];
+        variablename = "output text1";
         break;
     case "match two":
-        output = [{variablename: "output text2"}];
+        variablename = "output text2";
         break;
     //if there are no matches this will be the output
     default:
-        output = [{variablename: "output text3"}];
+        variablename = "output text3";
 }
+
+******************************************************************
+// Output - once the process is done, output all the data
+******************************************************************
+
+output = [{variablename: variablename}];
