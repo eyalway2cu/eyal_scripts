@@ -28,7 +28,7 @@ if (getParameterByName("utm_medium")) {
 }
 
 if (getParameterByName("utm_campaign")) {
-    var utm_campaign = getParameterByName("utm_campagin");
+    var utm_campaign = getParameterByName("utm_campaign");
 } else {
     var utm_campaign = "";
 }
