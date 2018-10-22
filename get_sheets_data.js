@@ -49,6 +49,6 @@
 		return obj;
 	};
   
-  // JSON object saved to data variable
+  // JSON object saved to data variable, replace the word sheetid with your google sheets id from URL
 	var data = xmlToJson(httpGet("https://spreadsheets.google.com/feeds/cells/sheetid/od6/public/basic"));
 </script>
