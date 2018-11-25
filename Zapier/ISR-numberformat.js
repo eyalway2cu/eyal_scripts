@@ -13,6 +13,9 @@ if (typeof number !== 'undefined') {
     if (number.indexOf("0") != 0) {
         number = "0" + number;
     }
+    if (number.indexOf("00") == 0) {
+        number = number.replace("00", "0");
+    }
     output = [{
        number: number
     }];
