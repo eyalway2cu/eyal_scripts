@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+// handle analytics event
+	var dataLayer = window.dataLayer || new Array();
+	for (var i=0, count=Caracal.ContactForm.list.length; i<count; i++)
+		Caracal.ContactForm.list[i].events.connect('submit-success', function(data) {
+			dataLayer.push({'event': 'leadSent'});
+			return true;
+		});
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>leadsent</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

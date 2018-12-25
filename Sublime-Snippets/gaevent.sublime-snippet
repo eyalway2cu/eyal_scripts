@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+ga('send', {
+  hitType: 'event',
+  eventCategory: '${1:}',
+  eventAction: '${2:}',
+  eventLabel: '${3:}'
+});
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gaevent</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
+
+

@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+<?php
+// MAKE SURE YOU HAVE IT OR NOTHING WILL WORK.
+require(\$_SERVER["DOCUMENT_ROOT"].'/lib/callbox_tagging.php');
+
+// Choose a random code and make sure the GET parameters contain code=...
+check_auth("${1}");
+
+// Must be set.
+\$config['access_code']	=	'${2}';
+\$config['secret_code']	=	'${3}';
+\$config['account_id']	=	'${4}';
+
+\$flags = array(
+	'variable'		=> true,
+	'source'		=> true,
+	'tag_new_calls'	=> false,
+	'lang'			=> 'en'
+);
+
+// FIRE IT!!!
+fire_tagging_function(\$config, get_data(), \$flags);
+?>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tagging</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

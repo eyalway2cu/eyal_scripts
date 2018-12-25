@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+window.CTMSourceEvent = function(event) {
+	if (event.state != 'after')
+	return;
+	if (window.already_shown)
+	return;
+	window.already_shown = true;
+	${1:}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ctmafter</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

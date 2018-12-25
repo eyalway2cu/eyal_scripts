@@ -1,0 +1,50 @@
+<snippet>
+	<content><![CDATA[
+<?php
+\$data = json_decode(file_get_contents("php://input"));
+//error_log(var_export(\$data, true));
+\$source = \$data->source;
+if (\$source != "Ad Extension"){
+	\$location = \$data->location;
+	\$urlvariables = parse_url(\$location, PHP_URL_QUERY);
+	parse_str(\$urlvariables, \$params);
+	if (!isset(\$params['ref'])){
+	    \$ref = "";
+	    if (\$data->refferer == "google"){
+	    	\$source = "Google Organic";
+	    }
+	}else{
+	    \$ref = \$params['ref'];
+	}
+	// Prepare data
+
+	\$postcontent = array(
+			"tag_list"	=>	\$ref,
+			"account_id"	=>	\$data->account_id,
+			"call_id"	=>	\$data->id
+		    );
+
+	\$url = "https://api.calltrackingmetrics.com/api/v1/accounts/" . \$data->account_id . "/calls/" . \$data->id . "/modify";
+	
+	\$token = "";
+
+	\$postcontentobj = json_encode(\$postcontent);
+
+	\$opts=array("http"=>array(
+		"method"=>"POST",
+		"header"=>"Authorization: Basic " . \$token . "\r\nContent-type: application/json",
+		"content"=>\$postcontentobj,
+		"ignore_errors" => true
+		));
+	\$context = stream_context_create(\$opts);
+	\$result = file_get_contents(\$url, false, \$context);
+	\$response = json_decode(\$result);
+	error_log(var_export(\$response, true));	
+}
+?>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>calltagging</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

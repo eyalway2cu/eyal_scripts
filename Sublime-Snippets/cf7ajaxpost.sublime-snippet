@@ -1,0 +1,35 @@
+<snippet>
+	<content><![CDATA[
+var wpcf7Elm = document.querySelector( '.wpcf7' );
+if (wpcf7Elm){
+	wpcf7Elm.addEventListener( 'wpcf7submit', function( event ) {
+	    var data = {
+	                "name": document.querySelector("input[name='your-name']").value,
+	                "phone": document.querySelector("input[name='your-phone']").value,
+	                "sid": __ctm.config.sid
+	        };
+	        
+	        var stringdata = JSON.stringify(data);
+	            console.log(data);
+	            jQuery.ajax({
+	                type: 'POST',
+	                datatype: 'jsonp',
+	                contentType: "application/json",
+	                async: true,
+	                url: '$1',
+	                data: stringdata,
+	                success: function(result){
+	                },
+	                error: function(result){
+	                }
+	            });   
+	        
+	}, false );
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cf7ajaxpost</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
