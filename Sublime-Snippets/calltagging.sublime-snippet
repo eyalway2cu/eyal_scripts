@@ -1,6 +1,7 @@
 <snippet>
 	<content><![CDATA[
 <?php
+
 \$data = json_decode(file_get_contents("php://input"));
 //error_log(var_export(\$data, true));
 \$source = \$data->source;
@@ -8,25 +9,31 @@ if (\$source != "Ad Extension"){
 	\$location = \$data->location;
 	\$urlvariables = parse_url(\$location, PHP_URL_QUERY);
 	parse_str(\$urlvariables, \$params);
-	if (!isset(\$params['ref'])){
-	    \$ref = "";
-	    if (\$data->refferer == "google"){
-	    	\$source = "Google Organic";
-	    }
-	}else{
-	    \$ref = \$params['ref'];
+	if (!isset(\$params['utm_source'])){
+	    if(isset(\$params['gclid'])){
+	    		\$source = "Google Adwords";
+	    	}elseif(strpos(\$data->referrer, 'google') !== false){
+	    		\$source = "Google Organic";
+		    }else{
+		    	\$source = "Direct or Unknown";
+		    }
+	}else {
+	    \$source = \$params['utm_source'];
 	}
 	// Prepare data
 
 	\$postcontent = array(
-			"tag_list"	=>	\$ref,
+			"tag_list"	=>	\$source,
 			"account_id"	=>	\$data->account_id,
 			"call_id"	=>	\$data->id
 		    );
 
 	\$url = "https://api.calltrackingmetrics.com/api/v1/accounts/" . \$data->account_id . "/calls/" . \$data->id . "/modify";
 	
-	\$token = "";
+	\$access = "";
+	\$secret = "";
+
+	\$token = base64_encode(\$access . ":" . \$secret);
 
 	\$postcontentobj = json_encode(\$postcontent);
 
@@ -39,7 +46,7 @@ if (\$source != "Ad Extension"){
 	\$context = stream_context_create(\$opts);
 	\$result = file_get_contents(\$url, false, \$context);
 	\$response = json_decode(\$result);
-	error_log(var_export(\$response, true));	
+	//error_log(var_export(\$response, true));	
 }
 ?>
 ]]></content>
