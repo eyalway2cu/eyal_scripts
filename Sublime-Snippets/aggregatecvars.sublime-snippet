@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+\$list = json_decode(\$data->cvars, true);
+
+if(isset(\$list)){
+\$result = array();
+    foreach(\$list as \$object){
+       \$result = array_merge(\$result, \$object);
+    }
+    
+    \$cvars = json_encode(\$result);
+    \$cvars = json_decode(\$cvars);	
+}else {
+	error_log("no cvars");	
+	exit();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>aggregatecvars</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
