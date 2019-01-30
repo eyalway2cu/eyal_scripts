@@ -10,7 +10,9 @@ if (\$source != "Ad Extension"){
 	\$urlvariables = parse_url(\$location, PHP_URL_QUERY);
 	parse_str(\$urlvariables, \$params);
 	if (!isset(\$params['utm_source'])){
-	    if(isset(\$params['gclid'])){
+	    	if(isset(\$params['fbclid'])){
+	    		\$source = "Facebook";
+	    	}elseif(isset(\$params['gclid'])){
 	    		\$source = "Google Adwords";
 	    	}elseif(strpos(\$data->referrer, 'google') !== false){
 	    		\$source = "Google Organic";
