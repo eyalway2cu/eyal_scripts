@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+function qstoJson(){
+	for(\$i=0;\$i<sizeof(\$_REQUEST);\$i++)
+	{
+		\$_REQUEST[\$_REQUEST[\$i]] = \$_REQUEST[++\$i];
+	}
+	\$data =(object)\$_REQUEST;
+	return \$data;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>qsobj</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

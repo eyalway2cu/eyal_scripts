@@ -32,8 +32,8 @@ if (\$source != "Ad Extension"){
 
 	\$url = "https://api.calltrackingmetrics.com/api/v1/accounts/" . \$data->account_id . "/calls/" . \$data->id . "/modify";
 	
-	\$access = "";
-	\$secret = "";
+	\$access = "29da5f5ee190070a38c57eb4fc3df856";
+	\$secret = "5f68386249e56d44d8315d38e011bdfc6fd0";
 
 	\$token = base64_encode(\$access . ":" . \$secret);
 

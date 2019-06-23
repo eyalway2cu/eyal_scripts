@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+		function cbForm(\$formid, \$token, \$name, \$phone, \$email, \$sid){
+			\$postcontent = array(
+					"unique_form_id"	=>	\$formid,
+					"caller_name"	=>	\$name,
+					"phone_number"	=>	\$phone,
+					"email"	=>	\$email,
+					"visitor_sid"	=>	\$sid
+				    );
+
+			\$url = "https://api.calltrackingmetrics.com/api/v1/formreactor/" . \$formid;
+
+			\$postcontent = array_filter(\$postcontent, 'strlen');
+			\$postcontentobj = json_encode(\$postcontent);
+
+			\$opts=array("http"=>array(
+				"method"=>"POST",
+				"header"=>"Authorization: Basic ". \$token . "\r\nContent-type: application/json",
+				"content"=>\$postcontentobj,
+				"ignore_errors" => true
+				));
+			\$context = stream_context_create(\$opts);
+			\$result = file_get_contents(\$url, false, \$context);
+			\$response = json_decode(\$result);
+			return $response;
+		}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cbform</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
