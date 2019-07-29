@@ -1,0 +1,76 @@
+<script type="text/javascript">
+// determine if data should be cleared after submission
+var clearData = false;
+
+// function to grab utm url parameters
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+// Get hidden utm fields
+var utm_source_field = document.querySelector('input#form-field-utm_source');
+var utm_medium_field = document.querySelector('input#form-field-utm_medium');
+var utm_campaign_field = document.querySelector('input#form-field-utm_campaign');
+var utm_term_field = document.querySelector('input#form-field-utm_term');
+var utm_content_field = document.querySelector('input#form-field-utm_content');
+
+// check if localStorage is defined
+if(typeof(Storage) !== "undefined") {
+	// check if localStorage utm_parameters are null, parse parameter from url and set as localStorage item
+	if (localStorage.getItem('utm_source') === null) {
+		if (getQueryVariable("utm_source")){
+			localStorage.setItem("utm_source", getQueryVariable("utm_source"));
+		}
+	}else {
+		utm_source_field.setAttribute("value", localStorage.getItem("utm_source"))
+	}
+	if (localStorage.getItem('utm_medium') === null) {
+		if (getQueryVariable("utm_medium")){
+			localStorage.setItem("utm_medium", getQueryVariable("utm_medium"));
+		}
+	}else {
+		utm_medium_field.setAttribute("value", localStorage.getItem("utm_medium"))
+	}
+	if (localStorage.getItem('utm_campaign') === null) {
+		if (getQueryVariable("utm_campaign")){
+			localStorage.setItem("utm_campaign", getQueryVariable("utm_campaign"));
+		}
+	}else {
+		utm_campaign_field.setAttribute("value", localStorage.getItem("utm_campaign"))
+	}
+	if (localStorage.getItem('utm_term') === null) {
+		if (getQueryVariable("utm_term")){
+			localStorage.setItem("utm_term", getQueryVariable("utm_term"));
+		}
+	}else {
+		utm_term_field.setAttribute("value", localStorage.getItem("utm_term"))
+	}
+	if (localStorage.getItem('utm_content') === null) {
+		if (getQueryVariable("utm_content")){
+			localStorage.setItem("utm_content", getQueryVariable("utm_content"));
+		}
+	}else {
+		utm_content_field.setAttribute("value", localStorage.getItem("utm_content"))
+	}
+
+	// clear localStorage if clearData is set to true
+	if (clearData){
+		jQuery( document ).ready(function( $ ){
+			$( document ).on('submit_success', function(){
+				localStorage.clear();
+			});
+		});
+	}
+	
+}
+else {
+// Sorry! No Web Storage support..
+}
+</script>
