@@ -1,4 +1,4 @@
-var POST_URL = "https://123.requestcatcher.com/";
+var POST_URL = "enter your webhook URL";
 
 function onSubmit(e) {
     var form = FormApp.getActiveForm();
