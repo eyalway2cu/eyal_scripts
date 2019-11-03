@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+<?php
+\$data = json_decode(file_get_contents("php://input"));
+
+function sendSms($numbers){
+		\$xml = "
+		    <sms>
+		    <user>
+		    <username>name</username>
+		    <password>name</password>
+		    </user>
+		    <source>name</source>
+		    <destinations>
+		    {\$numbers}
+		    </destinations>
+		    <message></message>
+		    <response>0</response>
+		    </sms>";
+
+		\$url = "https://019sms.co.il:8090/api";
+
+		\$opts=array("http"=>array(
+			"method"=>"POST",
+			"header"=>"Content-Type: application/xml; charset=utf-8",
+			"content"=>\$xml
+			));
+		\$context = stream_context_create(\$opts);
+		\$result = file_get_contents(\$url, false, \$context);
+		//error_log(\$result);
+}
+
+if (\$data->is_new_caller != true){
+	exit();
+}else{
+	\$destinations = "<phone>0" . \$data->caller_number_bare . "</phone>";
+	\$response = sendSms(\$destinations);
+}
+?>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>repeatcallsms</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

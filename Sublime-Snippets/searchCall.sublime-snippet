@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+function searchCall(\$phone, \$token, \$account_id){
+
+	\$url = "https://api.calltrackingmetrics.com/api/v1/accounts/" . \$account_id . "/calls?filter=" . \$phone;
+
+	\$opts=array("http"=>array(
+		"method"=>"GET",
+		"header"=>"Authorization: Basic ". \$token . "\r\nContent-type: application/json",
+		"ignore_errors" => true
+		));
+	\$context = stream_context_create(\$opts);
+	\$result = file_get_contents(\$url, false, \$context);
+	\$response = json_decode(\$result);
+	return \$response->calls;	
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>searchCall</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
