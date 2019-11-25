@@ -11,9 +11,9 @@ function redirectAfterSubmission( $record, $ajax_handler ){
 
 	// get fields using method in Form_Record class
 	$raw_fields = $record->get('fields');
-    $fields = [];
-    foreach ( $raw_fields as $id => $field ) {
-        $fields[$id] = $field['value'];
+    	$fields = [];
+   	foreach ( $raw_fields as $id => $field ) {
+        	$fields[$id] = $field['value'];
 	}
 
 	// set up my redirect url
@@ -26,10 +26,9 @@ function redirectAfterSubmission( $record, $ajax_handler ){
 	if( $form_id == 'your_form_id' ){
 	    // do redirect stuff
 		header("Location: ". $redirect_url);
-	}
-	    else{
-	         return;
-	    }
+	}else{
+	     	return;
+	     } 
 }
 
 add_action( 'elementor_pro/forms/validation', 'redirectAfterSubmission', 10, 2 );
