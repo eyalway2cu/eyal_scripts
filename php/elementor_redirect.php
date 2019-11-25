@@ -31,4 +31,6 @@ function redirectAfterSubmission( $record, $ajax_handler ){
 	         return;
 	    }
 }
+
+add_action( 'elementor_pro/forms/validation', 'redirectAfterSubmission', 10, 2 );
 ?>
