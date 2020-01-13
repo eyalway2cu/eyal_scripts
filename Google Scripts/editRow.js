@@ -27,5 +27,5 @@ function editRow(event) {
         'contentType': 'application/json',
         'payload': JSON.stringify(payload)
     };
-    UrlFetchApp.fetch('https://hook.integromat.com/fnrn3e6ia655rhkus5vjp8i4fri9sd28', options);
+    UrlFetchApp.fetch('https://yourwebhookurl', options);
 }
