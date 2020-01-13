@@ -19,7 +19,6 @@ function editRow(event) {
         payload[name] = value;
     }
     payload["row_number"] = row;
-    Logger.log(JSON.stringify(payload));
     var options = {
         'method': 'post',
         'contentType': 'application/json',
