@@ -1,6 +1,5 @@
 const csv = require('csv-parser');
 const fs = require('fs');
-const http = require('http');
 const mailcheck = require('mailcheck');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const writeData = [];
