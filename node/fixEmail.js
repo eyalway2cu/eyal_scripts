@@ -31,6 +31,5 @@ fs.createReadStream(filepath).on('error', () => {
             title: 'FixedEmail'
         }, ]
     });
-    console.log(writeData);
     csvWriter.writeRecords(writeData).then(() => console.log('The CSV file was written successfully'));
 })
