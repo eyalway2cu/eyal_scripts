@@ -20,7 +20,7 @@ function sendData(item) {
 }
 
 
-export function submissions_afterInsert(item, context) {
+export function datasetname_afterInsert(item, context) {
 	sendData(item);
 	return item
 }
