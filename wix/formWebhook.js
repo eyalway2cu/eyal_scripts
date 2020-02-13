@@ -1,4 +1,5 @@
 import wixCrm from 'wix-crm-backend';
+import { fetch } from 'wix-fetch';
 
 function sendData(item) {
     fetch("YOURWEBHOOKADDRESS", {
