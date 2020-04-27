@@ -10,7 +10,6 @@ function onSubmit(e) {
         var question = response[i].getItem().getTitle();
         var answer = response[i].getResponse();
         payload[question] = answer;
-
     }
   
     var options = {
