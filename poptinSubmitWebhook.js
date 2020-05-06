@@ -8,7 +8,7 @@
 // **Instructions - Place the following code under the "tracking code" section in your Poptin form**
 
 var data = {};
-var fields = poptinSubmitted["YOURPOPUPID"].fields.map( function(field) {
+poptinSubmitted["YOURPOPUPID"].fields.map( function(field) {
     data[field.name] = field.value;
     return data;
 });
