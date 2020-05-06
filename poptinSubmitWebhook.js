@@ -5,12 +5,13 @@
 // Access-Control-Allow-Methods: GET, POST, OPTIONS
 // Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
 
-// **Intructions - Place the following code under the "tracking code" section in your Poptin form**
+// **Instructions - Place the following code under the "tracking code" section in your Poptin form**
 
 var data = {};
-for (i=0;i<poptinSubmitted["YOURPOPUPID"].fields.length;i++){
-    data[poptinSubmitted["YOURPOPUPID"].fields[i].name] = poptinSubmitted["YOURPOPUPID"].fields[i].value;
-}
+var fields = poptinSubmitted["YOURPOPUPID"].fields.map( function(field) {
+    data[field.name] = field.value;
+    return data;
+});
 fetch("YOUR WEBHOOK URL", {
   method: "post",
   headers: {
