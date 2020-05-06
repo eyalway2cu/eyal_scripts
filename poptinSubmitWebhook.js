@@ -1,9 +1,11 @@
-//This code will grab submission data from a Poptin form and submit the data in JSON format to your selected endpoint.
+// This code will grab submission data from a Poptin form and submit the data in JSON format to your selected endpoint.
 
-//If you encounter CORS issues, make sure you set the appropriate accept headers in your endpoint such as:
-//Access-Control-Allow-Origin: *
-//Access-Control-Allow-Methods: GET, POST, OPTIONS
-//Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+// If you encounter CORS issues, make sure you set the appropriate accept headers in your endpoint such as:
+// Access-Control-Allow-Origin: *
+// Access-Control-Allow-Methods: GET, POST, OPTIONS
+// Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+
+// **Intructions - Place the following code under the "tracking code" section in your Poptin form**
 
 var data = {};
 for (i=0;i<poptinSubmitted["YOURPOPUPID"].fields.length;i++){
