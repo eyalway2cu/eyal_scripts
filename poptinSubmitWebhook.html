@@ -36,9 +36,8 @@ function isEmpty(obj) {
 }
 
 function sendData(webhook, poptinid, search) {
-    var obj = {};
     if (isEmpty(search)) {
-
+        var obj = {};
     } else {
         var obj = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function(key, value) { return key === "" ? value : decodeURIComponent(value) });
     }
