@@ -1,0 +1,63 @@
+// This code will grab submission data from a Poptin form and submit the data in JSON format to your selected endpoint.
+
+// If you encounter CORS issues, make sure you set the appropriate accept headers in your endpoint such as:
+// Access-Control-Allow-Origin: *
+// Access-Control-Allow-Methods: GET, POST, OPTIONS
+// Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+
+// **Instructions - Place the following code under the "tracking code" section in your Poptin form**
+
+<script>
+// Set webhook URL
+var webhook = "YOURWEBHOOKURL";
+// Set Poptin ID
+var poptinid = "POPTINID";
+
+function parseUrl(href) {
+    var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+    return match && {
+        href: href,
+        protocol: match[1],
+        host: match[2],
+        hostname: match[3],
+        port: match[4],
+        pathname: match[5],
+        search: match[6],
+        hash: match[7]
+    }
+}
+
+function isEmpty(obj) {
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+function sendData(webhook, poptinid, search) {
+    var obj = {};
+    if (isEmpty(search)) {
+
+    } else {
+        var obj = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function(key, value) { return key === "" ? value : decodeURIComponent(value) });
+    }
+    poptinSubmitted[poptinid].fields.map(function(field) {
+        data[field.name] = field.value;
+    });
+
+    fetch(webhook, {
+            method: "post",
+            headers: {
+                "Accept": "application/json, text/plain, /",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ...data, ...obj })
+        }).then(res => res.json())
+        .then(res => console.log(res));
+}
+
+var parsedUrl = parseUrl(document.location.href);
+var search = parsedUrl.search.replace("?", "");
+var result = sendData(webhook, poptinid, search);
+</script>
