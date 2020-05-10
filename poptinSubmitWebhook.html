@@ -53,8 +53,7 @@ function sendData(webhook, poptinid, search) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ ...data, ...obj })
-        }).then(res => res.json())
-        .then(res => console.log(res));
+        }).then(res => res);
 }
 
 var parsedUrl = parseUrl(document.location.href);
