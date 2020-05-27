@@ -14,7 +14,7 @@ add_action( 'wpcf7_before_send_mail', 'sendData' );
 		$data = json_encode(array(
 			"email" => "{$posted_data["your-email"]}",
 			"name" => "{$posted_data["your-name"]}",
-			"phone" => "{$posted_data["your-hone"]}",
+			"phone" => "{$posted_data["your-phone"]}",
 			"sid"	=>	"{$posted_data["sid"]}",
 			"URL" => "$url"
 		));
