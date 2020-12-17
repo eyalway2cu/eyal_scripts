@@ -2,7 +2,6 @@ var number = input.number;
 
 if (typeof number !== 'undefined') {
     var number = number.trim();
-    var number = number.replace(new RegExp('-', 'g'), '');
     var number = number.replace(/\D/g,'');
 
     if (number.indexOf("+") > -1) {
