@@ -2,7 +2,7 @@ exports.handler = function(event, context, callback) {
     let call = event.activity;
     context.ctm.update({
         custom_fields: {
-            fieldname: 'value
+            fieldname: 'value'
         }
     }).then(function() {
         console.log("fields injected");
