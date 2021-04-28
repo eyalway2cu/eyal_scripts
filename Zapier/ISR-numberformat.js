@@ -2,7 +2,7 @@ var number = input.number;
 
 if (typeof number !== 'undefined') {
     var number = number.trim();
-    var number = number.replace(/\D/g,'');
+    number = number.replace(/\D/g,'');
 
     if (number.indexOf("972") == 0) {
         number = number.replace("972", "0");
