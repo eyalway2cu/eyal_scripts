@@ -3,6 +3,7 @@
 This code will send a webhook to your desired URL after a succesfull Elementor form submission.
 It will not interfere with any webhooks that are set on the form.
 */
+/* copy from here */
 function sendSecondWebhookElementor( $record, $ajax_handler ){
     // get form settings
     $form_settings = $record->get('form_settings');
@@ -29,4 +30,5 @@ function sendSecondWebhookElementor( $record, $ajax_handler ){
 }
 
 add_action( 'elementor_pro/forms/validation', 'sendSecondWebhookElementor', 10, 2 );
+/* copy until here */
 ?>
