@@ -9,6 +9,8 @@ function sendSecondWebhookElementor( $record, $ajax_handler ){
     $form_settings = $record->get('form_settings');
     // get form ID
     $form_id = $form_settings['form_id'];
+    // get form Name
+    $form_name = $form_settings['form_name'];
 
     // get fields using method in Form_Record class
     $raw_fields = $record->get('fields');
@@ -17,8 +19,10 @@ function sendSecondWebhookElementor( $record, $ajax_handler ){
             $fields[$id] = $field['value'];
     }
     
-    //add formid to payload
+    // add formid to payload
     $fields['form_id'] = $form_id;
+    // add form name to payload
+    $fields['form_name'] = $form_name;
 
     $url = "WEBHOOKURL";
     $opts=array("http"=>array(
