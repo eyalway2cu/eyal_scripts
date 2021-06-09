@@ -16,6 +16,9 @@ function sendSecondWebhookElementor( $record, $ajax_handler ){
     foreach ( $raw_fields as $id => $field ) {
             $fields[$id] = $field['value'];
     }
+    
+    //add formid to payload
+    $fields['form_id'] = $form_id;
 
     $url = "WEBHOOKURL";
     $opts=array("http"=>array(
