@@ -62,8 +62,8 @@ if(typeof(Storage) !== "undefined") {
 
 	// clear localStorage if clearData is set to true
 	if (clearData){
-		jQuery( document ).ready(function( $ ){
-			$( document ).on('submit_success', function(){
+		jQuery( document ).ready(function( jQuery ){
+			jQuery( document ).on('submit_success', function(){
 				localStorage.clear();
 			});
 		});
