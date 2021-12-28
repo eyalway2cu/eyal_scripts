@@ -13,11 +13,17 @@ exports.handler = function(event, context, callback) {
         dl = call.webvisit.location_path;
         dh = call.webvisit.location_host;
     }
+    var cid = "";
+    if (call.hasOwnProperty('webvisit'){
+        cid = call.ga.cid.substring(6);
+    }else{
+        cid = call.ga.cid;
+    }
     context.ctm.api_get(`shopify/customer_info?c_num=${call.caller_number_complete.substr(1)}`).then(function(response) {
         var shopify_payload = JSON.parse(response.responseBody);
         shopify_payload.customers[0].orders.forEach(function(order) {
             if (order.id == orderid) {
-                var query = `?v=1&t=pageview&tid=${uaid}&cid=${call.ga.cid.substring(6)}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}` + "&";
+                var query = `?v=1&t=pageview&tid=${uaid}&cid=${cid}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}` + "&";
                 var line_items = order.line_items;
                 for (i = 0; i < line_items.length; i++) {
                     query += "pr" + (i + 1) + "id=" + line_items[i].sku + "&";
