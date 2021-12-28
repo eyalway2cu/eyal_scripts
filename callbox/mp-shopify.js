@@ -1,6 +1,6 @@
 exports.handler = function(event, context, callback) {
-    var clientname = "Adita";
-    var uaid = "UA-72076916-1";
+    var clientname = "Client Name";
+    var uaid = "Analytics property id";
     var request = require("request");
     var call = event.activity;
     var orderid = false;
