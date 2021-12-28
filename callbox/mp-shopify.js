@@ -9,12 +9,10 @@ exports.handler = function(event, context, callback) {
     }
     var dl = "";
     var dh = "";
+    var cid = "";
     if (call.hasOwnProperty('webvisit')) {
         dl = call.webvisit.location_path;
         dh = call.webvisit.location_host;
-    }
-    var cid = "";
-    if (call.hasOwnProperty('webvisit'){
         cid = call.ga.cid.substring(6);
     }else{
         cid = call.ga.cid;
