@@ -1,4 +1,6 @@
 exports.handler = function(event, context, callback) {
+    var clientname = "Adita";
+    var uaid = "UA-72076916-1";
     var request = require("request");
     var call = event.activity;
     var orderid = false;
@@ -15,12 +17,12 @@ exports.handler = function(event, context, callback) {
         var shopify_payload = JSON.parse(response.responseBody);
         shopify_payload.customers[0].orders.forEach(function(order) {
             if (order.id == orderid) {
-                var query = `?v=1&t=pageview&tid=UA-72076916-1&cid=${call.ga.cid.substring(6)}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}` + "&";
+                var query = `?v=1&t=pageview&tid=${uaid}&cid=${call.ga.cid.substring(6)}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}` + "&";
                 var line_items = order.line_items;
                 for (i = 0; i < line_items.length; i++) {
                     query += "pr" + (i + 1) + "id=" + line_items[i].sku + "&";
                     query += "pr" + (i + 1) + "nm=" + line_items[i].name + "&";
-                    query += "pr" + (i + 1) + "br=Adita&";
+                    query += "pr" + (i + 1) + `br=${clientname}&`;
                     query += "pr" + (i + 1) + "qt=" + line_items[i].quantity + "&";
                     query += "pr" + (i + 1) + "pr=" + line_items[i].price;
                     if (i + 1 !== line_items.length) {
