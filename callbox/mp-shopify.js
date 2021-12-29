@@ -21,7 +21,7 @@ exports.handler = function(event, context, callback) {
         var shopify_payload = JSON.parse(response.responseBody);
         shopify_payload.customers[0].orders.forEach(function(order) {
             if (order.id == orderid) {
-                var query = `?v=1&t=pageview&tid=${uaid}&cid=${cid}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}` + "&";
+                var query = `?v=1&t=pageview&tid=${uaid}&cid=${cid}&dl=${dl}&dh=${dh}&pa=purchase&ti=${orderid}&`;
                 var line_items = order.line_items;
                 for (i = 0; i < line_items.length; i++) {
                     query += "pr" + (i + 1) + "id=" + line_items[i].sku + "&";
