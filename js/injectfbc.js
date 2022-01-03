@@ -1,3 +1,4 @@
+// function to get url variables
 function getQueryVariable(variable){
        var query = window.location.search.substring(1);
        var vars = query.split("&");
@@ -8,11 +9,25 @@ function getQueryVariable(variable){
        return(false);
 }
 
-var fbc = "";
-var timestamp = + new Date();
-if (getQueryVariable("fbclid")){
-    fbc = `fb.1.${timestamp}.${getQueryVariable("fbclid")}`;
-    if (document.querySelector("input#fbc")){
-        document.querySelector("input#fbc").setAttribute("value", fbc);
+//function to inject fbc field into form
+function injectToField(formField){
+    if (formField){
+        formField.setAttribute("value", localStorage.getItem("fbc"));
     }
+}
+
+// set the field we want to inject the value into
+var formField = false;
+var elementSelector = "input#form-field-name";
+if (document.querySelector(elementSelector)){
+    formField = document.querySelector(elementSelector);
+}
+
+// handle injection
+if(localStorage.getItem("fbc") === null){
+    var timestamp = + new Date();
+    localStorage.setItem("fbc", `fb.1.${timestamp}.${getQueryVariable("fbclid")}`);
+    injectToField(formField);
+}else{
+    injectToField(formField);
 }
