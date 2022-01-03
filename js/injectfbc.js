@@ -26,8 +26,10 @@ if (document.querySelector(elementSelector)){
 // handle injection
 if(localStorage.getItem("fbc") === null){
     var timestamp = + new Date();
-    localStorage.setItem("fbc", `fb.1.${timestamp}.${getQueryVariable("fbclid")}`);
-    injectToField(formField);
+    if (getQueryVariable("fbclid")){
+       localStorage.setItem("fbc", `fb.1.${timestamp}.${getQueryVariable("fbclid")}`);
+       injectToField(formField);
+    }
 }else{
     injectToField(formField);
 }
