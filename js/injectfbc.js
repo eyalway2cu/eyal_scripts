@@ -1,35 +1,38 @@
-// function to get url variables
-function getQueryVariable(variable){
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
+// get querystring from URL
+var query_string = new URL(window.location).searchParams;
+
+// set the form field we would like to inject the data into
+var form_field = document.querySelector('input#form-field-name'); 
+
+// get the fbclid param from querystring
+var click_id = query_string.get('fbclid');
+
+// determine if you would like to clear the generated FBC from localStorage after the form is submitted
+var clearls = false;
+
+if (localStorage.getItem('fbc') === null) {
+	// generate new id and store it for later use
+	if (click_id) {
+		var timestamp = + new Date();
+		var fbc = `fb.1.${timestamp}.${click_id}`;
+
+		localStorage.setItem('fbc', fbc);
+
+		// assign value if field is present
+		if (form_field)
+			form_field.setAttribute('value', fbc);
+	}
+
+} else if (form_field) {
+	// set field value from previously generated and stored one
+	form_field.setAttribute('value', localStorage.getItem('fbc'));
 }
 
-//function to inject fbc field into form
-function injectToField(formField){
-    if (formField){
-        formField.setAttribute("value", localStorage.getItem("fbc"));
-    }
-}
-
-// set the field we want to inject the value into
-var formField = false;
-var elementSelector = "input#form-field-name";
-if (document.querySelector(elementSelector)){
-    formField = document.querySelector(elementSelector);
-}
-
-// handle injection
-if(localStorage.getItem("fbc") === null){
-    var timestamp = + new Date();
-    if (getQueryVariable("fbclid")){
-       localStorage.setItem("fbc", `fb.1.${timestamp}.${getQueryVariable("fbclid")}`);
-       injectToField(formField);
-    }
-}else{
-    injectToField(formField);
+// Clear fbc from localStorage after submission
+if (clearls){
+       jQuery( document ).ready(function( $ ){
+              $( document ).on('submit_success', function(){
+                     // form has been submitted do your thing
+              });
+       });
 }
