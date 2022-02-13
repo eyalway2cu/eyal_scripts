@@ -1,3 +1,4 @@
+<?php
 function formatPhoneNumber($phoneNumber) {
     $phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);
 
@@ -25,3 +26,4 @@ function formatPhoneNumber($phoneNumber) {
 
     return $phoneNumber;
 }
+?>
