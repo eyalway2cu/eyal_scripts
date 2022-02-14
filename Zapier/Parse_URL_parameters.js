@@ -15,34 +15,29 @@ function getParameterByName(name) {
         return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+var utm_source = "";
 if (getParameterByName("utm_source")) {
-    var utm_source = getParameterByName("utm_source");
-} else {
-    var utm_source = "";
+    utm_source = getParameterByName("utm_source");
 }
 
+var utm_medium = "";
 if (getParameterByName("utm_medium")) {
-    var utm_medium = getParameterByName("utm_medium");
-} else {
-    var utm_medium = "";
+    utm_medium = getParameterByName("utm_medium");
 }
 
+var utm_campaign = "";
 if (getParameterByName("utm_campaign")) {
-    var utm_campaign = getParameterByName("utm_campaign");
-} else {
-    var utm_campaign = "";
+    utm_campaign = getParameterByName("utm_campaign");
 }
 
+var utm_term = "";
 if (getParameterByName("utm_term")) {
-    var utm_term = getParameterByName("utm_term");
-} else {
-    var utm_term = "";
+    utm_term = getParameterByName("utm_term");
 }
 
+var utm_content = "";
 if (getParameterByName("utm_content")) {
-    var utm_content = getParameterByName("utm_content");
-} else {
-    var utm_content = "";
+    utm_content = getParameterByName("utm_content");
 }
 
 
