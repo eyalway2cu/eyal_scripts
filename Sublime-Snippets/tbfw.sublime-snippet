@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+include('../taboola/framework.php');
+\$taboola = new Taboola();
+
+\$clickidparam = "tb_click_id";
+\$eventName = "CallboxCall";
+\$tbresult = \$taboola->s2s(\$data, \$clickidparam, \$eventName);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tbfw</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

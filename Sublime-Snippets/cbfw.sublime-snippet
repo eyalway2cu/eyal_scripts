@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+include('../callbox/framework.php');
+\$cbtoken = "";
+\$callbox = new Callbox();
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cbfw</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

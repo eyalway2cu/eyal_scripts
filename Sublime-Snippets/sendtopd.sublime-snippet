@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[
+function sendToPd(\$data){
+	\$url = "";
+    \$opts = array("http" => array(
+        "method"  => "POST",
+        "header"  => "Content-type: application/json",
+        "content" => json_encode(\$data)
+    ));
+    \$context = stream_context_create(\$opts);
+    \$result  = file_get_contents(\$url, false, \$context);
+    return \$result;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sendtopd</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

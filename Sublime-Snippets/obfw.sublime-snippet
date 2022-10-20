@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+include('../outbrain/framework.php');
+\$outbrain = new Outbrain();
+
+\$clickidparam = "ob_click_id";
+\$eventName = "CallboxCall";
+\$obresult = \$outbrain->s2s(\$data, \$clickidparam, \$eventName);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>obfw</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
