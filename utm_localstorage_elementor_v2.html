@@ -1,0 +1,55 @@
+<script type="text/javascript">
+(function() {
+
+    const clearData = false;
+
+    function getQueryVariable(variable) {
+        const query = window.location.search.substring(1);
+        const vars = query.split("&");
+        for (let i = 0; i < vars.length; i++) {
+            let pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    function getUtmFieldById(fieldId) {
+        return document.querySelector(`input#${fieldId}`);
+    }
+
+    const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+    const utmFields = {};
+
+    utmParams.forEach(param => {
+        utmFields[param] = getUtmFieldById(`form-field-${param}`);
+    });
+
+    if (typeof(Storage) !== "undefined") {
+        utmParams.forEach(param => {
+            if (localStorage.getItem(param) === null) {
+                const queryValue = getQueryVariable(param);
+                if (queryValue) {
+                    localStorage.setItem(param, queryValue);
+                }
+            } else {
+                if (utmFields[param]) {
+                    utmFields[param].setAttribute("value", localStorage.getItem(param));
+                }
+            }
+        });
+
+        if (clearData) {
+            jQuery( document ).ready(function( jQuery ){
+              jQuery( document ).on('submit_success', function(){
+                localStorage.clear();
+              });
+            });
+        }
+    } else {
+        // Optionally, handle the case when there's no web storage support.
+    }
+
+})();
+</script>
