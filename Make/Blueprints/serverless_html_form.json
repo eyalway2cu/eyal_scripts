@@ -1,0 +1,293 @@
+{
+    "name": "Integration Webhooks",
+    "flow":
+    [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters":
+            {
+                "hook": 1172522,
+                "maxResults": 1
+            },
+            "mapper":
+            {},
+            "metadata":
+            {
+                "designer":
+                {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore":
+                {
+                    "parameters":
+                    {
+                        "hook":
+                        {
+                            "label": "Harta Client Side Form",
+                            "data":
+                            {
+                                "editable": "true"
+                            }
+                        }
+                    }
+                },
+                "parameters":
+                [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface":
+                [
+                    {
+                        "name": "attendees",
+                        "type": "array",
+                        "spec":
+                        {
+                            "type": "text"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters":
+            {
+                "type": ""
+            },
+            "mapper":
+            {
+                "json": "[\n{\n\"name\": \"eyal\",\n\"id\": \"1234\"\n},\n{\n\"name\": \"eyal2\",\n\"id\": \"1233453454\"\n},\n{\n\"name\": \"eyal3\",\n\"id\": \"2234523452345\"\n},\n{\n\"name\": \"eyal4\",\n\"id\": \"234322342344\"\n},\n{\n\"name\": \"eyal5\",\n\"id\": \"234234\"\n}\n]"
+            },
+            "metadata":
+            {
+                "designer":
+                {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore":
+                {
+                    "parameters":
+                    {
+                        "type":
+                        {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters":
+                [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect":
+                [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "util:TextAggregator",
+            "version": 1,
+            "parameters":
+            {
+                "rowSeparator": "\n",
+                "feeder": 1
+            },
+            "mapper":
+            {
+                "value": "<div>\n    <label>\n        <input type=\"checkbox\" name=\"student\" value=\"{{3.id}}\"> {{3.name}}\n    </label>\n</div>"
+            },
+            "metadata":
+            {
+                "designer":
+                {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore":
+                {
+                    "parameters":
+                    {
+                        "rowSeparator":
+                        {
+                            "label": "New row"
+                        }
+                    },
+                    "extra":
+                    {
+                        "feeder":
+                        {
+                            "label": "Webhooks - Custom webhook [1]"
+                        }
+                    }
+                },
+                "parameters":
+                [
+                    {
+                        "name": "rowSeparator",
+                        "type": "select",
+                        "label": "Row separator",
+                        "validate":
+                        {
+                            "enum":
+                            [
+                                "\n",
+                                "\t",
+                                "other"
+                            ]
+                        }
+                    }
+                ],
+                "expect":
+                [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 2,
+            "module": "gateway:WebhookRespond",
+            "version": 1,
+            "parameters":
+            {},
+            "mapper":
+            {
+                "status": "200",
+                "body": "<!DOCTYPE html>\n<html>\n<head>\n    <title>Attendance Form</title>\n    <style>\n        form {\n            width: 500px;\n            margin-left: auto;\n            margin-right: auto;\n            margin-top: 400px;\n        }\n    </style>\n</head>\n<body>\n    <form id=\"attendanceForm\">\n        <!-- Repeat this block for each student -->\n        {{4.text}}\n\n        <button type=\"submit\">Submit Attendance</button>\n    </form>\n\n    <!-- <script src=\"script.js\"></script> -->\n    <script>\n        document.getElementById('attendanceForm').addEventListener('submit', function(event) {\n            event.preventDefault();\n\n            const checkedBoxes = document.querySelectorAll('input[name=\"student\"]:checked');\n            // console.log(checkedBoxes);\n            const attendeeIds = Array.from(checkedBoxes).map(box => box.value);\n            // console.log(attendeeIds);\n\n            // Send HTTP POST request\n            fetch('https://hook.eu1.make.com/5lvnebyo562wmprsf0jjkgq4iqvpaots', {\n                method: 'POST',\n                headers: {\n                    'Content-Type': 'application/json',\n                },\n                body: JSON.stringify({ attendees: attendeeIds }),\n            })\n            .then(response => response.json())\n            .then(data => console.log(data))\n            .catch(error => console.error('Error:', error));\n        });\n    </script>\n</body>\n</html>",
+                "headers":
+                [
+                    {
+                        "key": "Content-type",
+                        "value": "text/html"
+                    }
+                ]
+            },
+            "metadata":
+            {
+                "designer":
+                {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore":
+                {
+                    "expect":
+                    {
+                        "headers":
+                        {
+                            "mode": "chose",
+                            "items":
+                            [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect":
+                [
+                    {
+                        "name": "status",
+                        "type": "uinteger",
+                        "label": "Status",
+                        "validate":
+                        {
+                            "min": 100
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    },
+                    {
+                        "name": "headers",
+                        "type": "array",
+                        "label": "Custom headers",
+                        "validate":
+                        {
+                            "maxItems": 16
+                        },
+                        "spec":
+                        [
+                            {
+                                "name": "key",
+                                "label": "Key",
+                                "type": "text",
+                                "required": true,
+                                "validate":
+                                {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text",
+                                "required": true,
+                                "validate":
+                                {
+                                    "max": 4096
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "advanced": true
+            }
+        }
+    ],
+    "metadata":
+    {
+        "instant": true,
+        "version": 1,
+        "scenario":
+        {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer":
+        {
+            "orphans":
+            []
+        },
+        "zone": "eu1.make.com"
+    }
+}
