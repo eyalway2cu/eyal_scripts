@@ -7,6 +7,8 @@ exports.handler = function(event, context, callback) {
 
   context.ctm.api_get("calls?per_page=100&direction[]=inbound&limit_fields[]=id&limit_fields[]=receiving_number_sid&limit_fields[]=unix_time").then((response) => {
     let data = JSON.parse(response.responseBody);
+    data.calls.shift(); // This removes the first element from the array
+    
     let lastCallTimestamps = numbers.reduce((acc, numberSid) => {
       acc[numberSid] = 0; // Initialize with a timestamp of 0
       return acc;
