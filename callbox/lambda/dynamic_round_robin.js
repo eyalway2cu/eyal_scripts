@@ -7,7 +7,7 @@ exports.handler = function(event, context, callback) {
 
   context.ctm.api_get("calls?per_page=100&direction[]=inbound&limit_fields[]=id&limit_fields[]=receiving_number_sid&limit_fields[]=unix_time").then((response) => {
     let data = JSON.parse(response.responseBody);
-    data.calls.shift(); // This removes the first element from the array
+    data.calls.shift(); // This removes the first element from the array, i.e current call
     
     let lastCallTimestamps = numbers.reduce((acc, numberSid) => {
       acc[numberSid] = 0; // Initialize with a timestamp of 0
@@ -31,7 +31,7 @@ exports.handler = function(event, context, callback) {
     let nextNumberIndex = (lastCalledNumberIndex + 1) % numbers.length;
     let nextNumberSid = numbers[nextNumberIndex];
 
-    console.log("Routing to next number SID:", nextNumberSid); // For debugging
+    console.log("Routing to next number SID:", nextNumberSid);
 
     // Proceed with routing to nextNumberSid
     context.done(null, {route: nextNumberSid});
