@@ -1,22 +1,22 @@
 exports.handler = function(event, context, callback) {
-    var utm_source = "";
-    var utm_medium = "";
-    var utm_content = "";
-    var utm_term = "";
-    var utm_campaign = "";
-    var gclid = "";
-    var fbclid = "";
+    let utm_source = "";
+    let utm_medium = "";
+    let utm_content = "";
+    let utm_term = "";
+    let utm_campaign = "";
+    let gclid = "";
+    let fbclid = "";
     let call = event.activity;
-    var visitor_ip = "";
+    let visitor_ip = "";
     if (call.visitor_ip){
       visitor_ip = call.visitor_ip;
     }
     
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name.toLowerCase() + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(call.location.toLowerCase());
+        let regexS = "[\\?&]" + name + "=([^&#]*)";
+        let regex = new RegExp(regexS);
+        let results = regex.exec(call.location);
         if (results === null) return "";
         else return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
@@ -38,6 +38,12 @@ exports.handler = function(event, context, callback) {
     if (getParameterByName("gclid")) {
         gclid = getParameterByName("gclid");
     }
+    if (getParameterByName("wbraid")) {
+        wbraid = getParameterByName("wbraid");
+    }
+    if (getParameterByName("gbraid")) {
+        gbraid = getParameterByName("gbraid");
+    }
     if (getParameterByName("fbclid")) {
         fbclid = getParameterByName("fbclid");
     }
@@ -50,6 +56,8 @@ exports.handler = function(event, context, callback) {
             utm_term,
             utm_campaign,
             gclid,
+            wbraid,
+            gbraid,
             fbclid,
             visitor_ip
         }
