@@ -5,9 +5,9 @@ exports.handler = async function(event, context, callback) {
     let call = event.activity;
     
     // Define the phone, account_sid, and account_token based on the event or environment
-    const phone = call.phone_number || 'default_phone_number';
-    const account_sid = process.env.ACCOUNT_SID || 'your_account_sid';
-    const account_token = process.env.ACCOUNT_TOKEN || 'your_account_token';
+    const phone = "972" + call.caller_number_bare || 'default_phone_number';
+    const account_sid = process.env.sid || 'your_account_sid';
+    const account_token = process.env.token || 'your_account_token';
     
     // Function to make a GET request to the API
     async function fetchData(phone, account_sid, account_token) {
