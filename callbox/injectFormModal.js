@@ -156,7 +156,8 @@ function setupModalEventListeners() {
 }
 
 // Open the modal
-function openModal() {
+function openModal(event) {
+    event.preventDefault();
     const modal = document.getElementById('phoneModal');
     modal.style.display = 'flex';
     modal.style.animation = 'fadeIn 0.5s';
