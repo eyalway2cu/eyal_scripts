@@ -1,14 +1,7 @@
 [
 	{
 		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = true}}",
-    "url": "/{{parameters.entity}}",
-  	"method": "POST",
-  	"body": {
-  		"{{...}}": "{{omit(parameters, 'zone', 'organizationID')}}"
-  	},
-		"response": {
-      "output": "{{body}}",
-		}
+		
 	},
 	{
 		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = false}}",
