@@ -1,0 +1,16 @@
+[
+  {
+      "name": "organizationID",
+      "type": "hidden",
+      "label": "Organisation ID",
+      "required": false,
+      "default": "{{var.organization.id}}"
+  },
+  {
+      "name": "zone",
+      "type": "hidden",
+      "label": "Zone Make",
+      "required": false,
+      "default": "{{var.organization.zoneDomain}}"
+  }
+]
