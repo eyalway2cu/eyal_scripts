@@ -1,0 +1,24 @@
+[
+	{
+		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = true}}",
+    "url": "/{{parameters.entity}}",
+  	"method": "POST",
+  	"body": {
+  		"{{...}}": "{{(omit(parameters, 'parameters.zone', 'parameters.organizationID'))}}"
+  	},
+		"response": {
+      "output": "{{body}}",
+		}
+	},
+	{
+		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = false}}",
+		"url": "/validationerror/",
+		"method": "POST",
+		"response": {
+			"error": {
+				"type": "InvalidAccessTokenError",
+				"message": "To use this app you need to purchase or renew your license at http://apps.automationil.com."
+			}
+		}
+	}
+]
