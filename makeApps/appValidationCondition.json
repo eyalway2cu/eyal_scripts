@@ -4,7 +4,7 @@
     "url": "/{{parameters.entity}}",
   	"method": "POST",
   	"body": {
-  		"{{...}}": "{{(omit(parameters, 'parameters.zone', 'parameters.organizationID'))}}"
+  		"{{...}}": "{{(omit(parameters, 'zone', 'organizationID'))}}"
   	},
 		"response": {
       "output": "{{body}}",
