@@ -1,10 +1,10 @@
 [
 	{
-		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = true}}",
+		"condition": "{{contains(common.paid_users,environment.host':'scenario.organizationId) = true}}",
 		
 	},
 	{
-		"condition": "{{contains(common.paid_users,parameters.zone':'parameters.organizationID) = false}}",
+		"condition": "{{contains(common.paid_users,environment.host':'scenario.organizationId) = false}}",
 		"url": "/validationerror/",
 		"method": "POST",
 		"response": {
